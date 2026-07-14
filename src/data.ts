@@ -186,7 +186,7 @@ export const pcComponents: PCComponent[] = [
       'Soundbar': '24W Built-In Stereo Soundbar',
       'Resolution': 'Full HD 1080p Support'
     },
-    description: 'A cinematic high-brightness home projector integrated with a powerful 24W stereo soundbar. Purchased in 2024 and maintained in absolute prime condition, this unit comes complete in its original retail box. Perfect for setting up an immersive home theater or high-end multimedia presentations.',
+    description: 'Purchased in 2024 and maintained in absolute prime condition, this unit comes complete in its original retail box. Perfect for setting up an immersive home theater or high-end multimedia presentations.',
     condition: 'Prime. Pristine hardware condition, very low usage hours. Package includes the original box, standard remote, plus a bonus ceiling mount kit and heavy-duty connector cable.',
     highlights: [
       'Incredibly loud and crisp 24W built-in soundbar eliminates the need for separate speakers',
