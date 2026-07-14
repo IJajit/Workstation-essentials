@@ -60,7 +60,7 @@ export default function App() {
                 </h1>
 
                 {/* Specification Subheading Bullets */}
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono text-[#00F2FF] pt-1">
+                <div className="flex flex-nowrap items-center gap-x-1.5 text-[9px] md:text-xs font-mono text-[#00F2FF] pt-1 whitespace-nowrap overflow-x-auto">
                   <span>Custom Build PC</span>
                   <span className="text-[#444]">|</span>
                   <span>Dual monitors + stand</span>
@@ -81,7 +81,7 @@ export default function App() {
               <div className="space-y-2.5">
                 <span className="text-[10px] text-[#00F2FF] uppercase tracking-wider font-mono block flex items-center gap-1.5 border-b border-[#222] pb-1.5 font-bold">
                   <Tag className="w-3.5 h-3.5 text-[#00F2FF]" />
-                  ASKING PRICE BREAKDOWN
+                  ASKING PRICE
                 </span>
                 <div className="space-y-1.5 font-mono text-xs">
                   <div className="flex justify-between items-center gap-4">
