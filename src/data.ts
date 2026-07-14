@@ -86,7 +86,7 @@ export const pcComponents: PCComponent[] = [
   },
   {
     id: 'monitor_primary',
-    name: 'Dell P2419H 24" IPS Monitor (2021)',
+    name: 'Dell P2419H 24" IPS Monitor',
     fullName: 'Dell P Series 24-inch Full HD LED-Lit Monitor with IPS Panel (P2419H)',
     category: 'monitor_primary',
     originalPrice: 12420,
@@ -115,7 +115,7 @@ export const pcComponents: PCComponent[] = [
   },
   {
     id: 'monitor_secondary',
-    name: 'Samsung SyncMaster LS20MYW (2009)',
+    name: 'Samsung SyncMaster LS20MYW',
     fullName: 'Samsung SyncMaster LS20MYW 20" LCD Monitor',
     category: 'monitor_secondary',
     originalPrice: 0,
