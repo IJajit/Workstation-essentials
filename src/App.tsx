@@ -245,7 +245,7 @@ export default function App() {
                     </div>
                     <div className="space-y-1.5 bg-[#0F0F0F]/40 p-4 rounded border border-[#222]">
                       <p className="text-[10px] text-[#00F2FF] font-mono uppercase tracking-wider font-bold">Contact Number</p>
-                      <p className="text-lg font-light text-white leading-normal">8971508516</p>
+                      <p className="text-lg font-light text-white leading-normal">9082897177</p>
                       <p className="text-[#8E9299] leading-relaxed">Interested people can contact this number directly via call or message.</p>
                     </div>
                   </div>
