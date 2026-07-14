@@ -1,0 +1,6 @@
+{
+  "name": "PC Showcase & Resale",
+  "description": "An interactive, visual showcase of a custom dual-monitor desktop PC setup, featuring detailed component breakdowns, specs, original versus resale price dynamics, and an interactive 2D build visualizer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
