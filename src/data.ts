@@ -103,7 +103,7 @@ export const pcComponents: PCComponent[] = [
       'Inputs': '1x HDMI 1.4, 1x DisplayPort 1.2, 1x VGA, 4x USB downstream ports',
       'Stand Adjustability': 'Height, Pivot (rotate 90°), Swivel, Tilt'
     },
-    description: 'This is the crown jewel of professional productivity. Manufactured in 2021, the Dell P2419H features a stunning 3-sided ultrathin bezel design and a highly accurate IPS panel, ensuring vibrant and uniform colors from any viewing angle. Its highly versatile ergonomic stand allows you to lift, tilt, swivel, and rotate the screen into portrait mode (perfect for reading logs or code).',
+    description: 'This is the crown jewel of professional productivity. Purchased in 2021, the Dell P2419H features a stunning 3-sided ultrathin bezel design and a highly accurate IPS panel, ensuring vibrant and uniform colors from any viewing angle. Its highly versatile ergonomic stand allows you to lift, tilt, swivel, and rotate the screen into portrait mode (perfect for reading logs or code).',
     condition: 'Flawless. Zero dead pixels, no scratches on the glass, stand mechanism works smoothly. Includes power and HDMI cables.',
     highlights: [
       'Stunning IPS panel with wide 178°/178° viewing angles',
@@ -132,7 +132,7 @@ export const pcComponents: PCComponent[] = [
       'Inputs': '1x VGA (D-Sub), 1x DVI-D',
       'Viewing Angles': '160° Horizontal / 160° Vertical'
     },
-    description: 'An extremely durable, classic secondary monitor manufactured in 2009. Sporting a 16:10 aspect ratio, it offers excellent vertical real estate, which makes it ideal for running side tasks such as chat programs (Discord, Slack), terminal output, Spotify, or viewing reference documentation while you code or game on the main screen.',
+    description: 'An extremely durable, classic secondary monitor purchased in 2009. Sporting a 16:10 aspect ratio, it offers excellent vertical real estate, which makes it ideal for running side tasks such as chat programs (Discord, Slack), terminal output, Spotify, or viewing reference documentation while you code or game on the main screen.',
     condition: 'Good. Well-preserved classic LCD monitor, fully working backlights, no line distortions, slight scuffs on the plastic frame consistent with age. Comes with a VGA or DVI-to-HDMI adapter.',
     highlights: [
       'Reliable secondary screen for multitasking efficiency',

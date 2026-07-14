@@ -72,7 +72,7 @@ export const ComponentDetails: React.FC<ComponentDetailsProps> = ({
         <div>
           <h4 className="text-[10px] font-semibold text-[#8E9299] uppercase tracking-wider mb-2 flex items-center gap-1.5 font-mono">
             <Info className="w-3.5 h-3.5 text-[#00F2FF]" />
-            OVERVIEW & CONTEXT
+            OVERVIEW
           </h4>
           <p className="text-xs text-[#E4E3E0] leading-relaxed bg-[#0F0F0F] p-4 rounded border border-[#222]">
             {component.description}
