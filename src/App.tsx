@@ -1,10 +1,233 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { pcComponents } from './data';
 import { PCVisualizer } from './components/PCVisualizer';
 import { ComponentDetails } from './components/ComponentDetails';
 import { ComponentCatalog } from './components/ComponentCatalog';
-import { Cpu, Monitor, HardDrive, Tag, Info, HelpCircle, Camera } from 'lucide-react';
+import { Cpu, Monitor, HardDrive, Tag, Info, HelpCircle, Camera, X, ChevronLeft, ChevronRight } from 'lucide-react';
+
+// ─── Photo Gallery Data ──────────────────────────────────────────────────────
+
+const photoCategories = [
+  {
+    id: 'pc',
+    label: 'Custom Build PC',
+    images: [
+      '/images/pc/PXL_20260717_050905664.PORTRAIT.jpg',
+      '/images/pc/PXL_20260717_051802622.PORTRAIT.jpg',
+      '/images/pc/PXL_20260717_052058495.PORTRAIT.jpg',
+      '/images/pc/PXL_20260717_052413583.MP.jpg',
+      '/images/pc/PXL_20260717_052544223.MP.jpg',
+      '/images/pc/PXL_20260717_052753373.jpg',
+      '/images/pc/PXL_20260717_053755137.PORTRAIT.jpg',
+      '/images/pc/WhatsApp Image 2026-07-17 at 10.30.07.jpeg',
+    ],
+  },
+  {
+    id: 'dell',
+    label: 'Dell Monitor',
+    images: [
+      '/images/dell-monitor/PXL_20260717_045157919.PORTRAIT.ORIGINAL.jpg',
+      '/images/dell-monitor/PXL_20260717_050518520.MP.jpg',
+    ],
+  },
+  {
+    id: 'samsung',
+    label: 'Samsung Monitor',
+    images: [
+      '/images/samsung-monitor/PXL_20260717_045244564.PORTRAIT.jpg',
+      '/images/samsung-monitor/PXL_20260717_050615246.MP.jpg',
+    ],
+  },
+  {
+    id: 'projector',
+    label: 'Projector',
+    images: [
+      '/images/projector/PXL_20260717_044136594.PORTRAIT.jpg',
+      '/images/projector/PXL_20260717_044251225.PORTRAIT.jpg',
+      '/images/projector/PXL_20260717_044323318.PORTRAIT.jpg',
+      '/images/projector/PXL_20260717_044356298.PORTRAIT.jpg',
+      '/images/projector/PXL_20260717_044429575.PORTRAIT.jpg',
+      '/images/projector/PXL_20260717_044651206.MP.jpg',
+      '/images/projector/PXL_20260717_044723105.MP.jpg',
+      '/images/projector/WhatsApp Image 2026-07-14 at 18.36.06.jpeg',
+    ],
+  },
+  {
+    id: 'stand',
+    label: 'Dual Monitor Stand',
+    images: [
+      '/images/dual-monitor-stand/PXL_20260717_045324951.PORTRAIT.jpg',
+    ],
+  },
+];
+
+// ─── Lightbox Component ───────────────────────────────────────────────────────
+
+function Lightbox({
+  images,
+  startIndex,
+  onClose,
+}: {
+  images: string[];
+  startIndex: number;
+  onClose: () => void;
+}) {
+  const [current, setCurrent] = useState(startIndex);
+
+  const prev = useCallback(() => setCurrent((i) => (i - 1 + images.length) % images.length), [images.length]);
+  const next = useCallback(() => setCurrent((i) => (i + 1) % images.length), [images.length]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [prev, next, onClose]);
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        key="lightbox-backdrop"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        {/* Close */}
+        <button
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-[#1A1C20]/80 border border-[#333] text-[#8E9299] hover:text-white hover:border-[#00F2FF] transition-colors"
+          onClick={onClose}
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {/* Prev */}
+        {images.length > 1 && (
+          <button
+            className="absolute left-4 z-10 p-2 rounded-full bg-[#1A1C20]/80 border border-[#333] text-[#8E9299] hover:text-white hover:border-[#00F2FF] transition-colors"
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+        )}
+
+        {/* Image */}
+        <motion.img
+          key={current}
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          src={images[current]}
+          alt={`Photo ${current + 1}`}
+          className="max-h-[90vh] max-w-[90vw] rounded-lg shadow-2xl object-contain"
+          onClick={(e) => e.stopPropagation()}
+        />
+
+        {/* Next */}
+        {images.length > 1 && (
+          <button
+            className="absolute right-4 z-10 p-2 rounded-full bg-[#1A1C20]/80 border border-[#333] text-[#8E9299] hover:text-white hover:border-[#00F2FF] transition-colors"
+            onClick={(e) => { e.stopPropagation(); next(); }}
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        )}
+
+        {/* Counter */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs font-mono text-[#8E9299] bg-[#1A1C20]/80 px-3 py-1 rounded-full border border-[#333]">
+          {current + 1} / {images.length}
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+// ─── Photo Gallery Section ────────────────────────────────────────────────────
+
+function PhotoGallery() {
+  const [activeTab, setActiveTab] = useState(photoCategories[0].id);
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+
+  const activeCategory = photoCategories.find((c) => c.id === activeTab)!;
+
+  return (
+    <section className="bg-[#151619] border border-[#222] p-6 md:p-8 rounded-lg space-y-5">
+      {/* Section header */}
+      <h4 className="text-xs font-mono tracking-wider text-[#E4E3E0] uppercase flex items-center gap-2">
+        <Camera className="w-4 h-4 text-[#00F2FF]" />
+        PHOTOS
+      </h4>
+
+      {/* Tab bar */}
+      <div className="flex flex-wrap gap-2">
+        {photoCategories.map((cat) => (
+          <button
+            key={cat.id}
+            onClick={() => setActiveTab(cat.id)}
+            className={`px-3 py-1.5 rounded text-[11px] font-mono uppercase tracking-wider border transition-all duration-200 ${
+              activeTab === cat.id
+                ? 'bg-[#00F2FF]/10 border-[#00F2FF] text-[#00F2FF]'
+                : 'bg-[#0F0F0F]/40 border-[#333] text-[#8E9299] hover:border-[#555] hover:text-[#E4E3E0]'
+            }`}
+          >
+            {cat.label}
+            <span className={`ml-1.5 text-[9px] ${activeTab === cat.id ? 'text-[#00F2FF]/70' : 'text-[#555]'}`}>
+              ({cat.images.length})
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* Image grid */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.2 }}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"
+        >
+          {activeCategory.images.map((src, i) => (
+            <motion.button
+              key={src}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative aspect-square overflow-hidden rounded border border-[#222] hover:border-[#00F2FF]/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-[#00F2FF]/40"
+              onClick={() => setLightbox({ images: activeCategory.images, index: i })}
+            >
+              <img
+                src={src}
+                alt={`${activeCategory.label} photo ${i + 1}`}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 flex items-center justify-center">
+                <Camera className="w-5 h-5 text-white opacity-0 group-hover:opacity-80 transition-opacity duration-200 drop-shadow-lg" />
+              </div>
+            </motion.button>
+          ))}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <Lightbox
+          images={lightbox.images}
+          startIndex={lightbox.index}
+          onClose={() => setLightbox(null)}
+        />
+      )}
+    </section>
+  );
+}
 
 export default function App() {
   const [activeComponentId, setActiveComponentId] = useState<string | null>('monitor_primary');
@@ -213,23 +436,7 @@ export default function App() {
                 </section>
 
                 {/* ==================== PHOTOS ==================== */}
-                <section className="bg-[#151619] border border-[#222] p-6 md:p-8 rounded-lg space-y-4">
-                  <h4 className="text-xs font-mono tracking-wider text-[#E4E3E0] uppercase flex items-center gap-2">
-                    <Camera className="w-4 h-4 text-[#00F2FF]" />
-                    PHOTOS
-                  </h4>
-                  <div className="bg-[#0F0F0F]/40 p-6 rounded border border-[#222] border-dashed text-center space-y-3">
-                    <div className="mx-auto w-12 h-12 rounded-full bg-[#1A1C20] flex items-center justify-center border border-[#333]">
-                      <Camera className="w-6 h-6 text-[#8E9299]" />
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-sm font-medium text-white">Photos uploading soon</p>
-                      <p className="text-xs text-[#8E9299]">
-                        I will upload the photos on 17th July as I'm traveling.
-                      </p>
-                    </div>
-                  </div>
-                </section>
+                <PhotoGallery />
 
                 {/* ==================== LOCATION & CONTACT ==================== */}
                 <section className="bg-[#151619] border border-[#222] p-6 md:p-8 rounded-lg space-y-4">
